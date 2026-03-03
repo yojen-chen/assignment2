@@ -1,0 +1,21 @@
+project:
+  type: website
+  title: Statistical Computing Assignment 2
+  output-dir: _site
+  
+website: 
+  sidebar: 
+    border: true
+    background: light
+    position: right
+    contents:
+    - index.qmd
+    - parallel.qmd
+
+format:
+  html: 
+    theme: cosmo
+    toc: true
+    toc-depth: 3
+    toc-location: right
+    number-sections: false

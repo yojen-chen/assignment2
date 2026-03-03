@@ -1,0 +1,172 @@
+---
+title: "Parallel Prac"
+format: html
+---
+
+## Question 1:
+
+Use a `foreach` loop to repeat 100 times:
+
+generate a random sample from an exponential distribution with mean 1
+
+calculate mean and variance
+
+row-bind your results (rbind) (results = mean and variance).
+
+```{r set up, include =FALSE}
+#| warning: false
+library(foreach)
+library(doParallel)
+library(MASS)
+library(iterators)
+library(microbenchmark)
+library(kableExtra)
+```
+
+```{r}
+result <- foreach(i = 1:100, .combine = 'rbind')%do%{
+  sample <- rexp(100, 1)
+  mean <- mean(sample)
+  variance <- var(sample)
+  as.vector(c(mean,variance))
+}
+colnames(result) <- c("Mean", "Variance")
+result
+```
+
+## Question 2:
+
+Use the `doParallel` package and `foreach` to bootstrap the median for the galaxies data (in library MASS).
+
+If the `foreach` function needs access to data or a function from a certain package, this can be done by adding the `.packages='MASS'` (for example) argument.
+
+How does processing time compare to that of serial processing? If each iteration’s run time is small, relative to the amount of data that needs to be loaded and returned, parallel processing might not actually speed up the total run time. Bootstrapping is relatively small: draw a sample, calculate a statistic. It might only start making a difference if each chunk becomes large relatively to the overheads of data transfer. Experiment with this. Try doing 1000 bootstrap samples at a time instead of managing single bootstrap samples.
+
+```{r}
+time_serial <- system.time({
+  gal_median_serial <- foreach(i = 1:1000, .combine = c, .packages = 'MASS') %do% {
+    median(sample(galaxies,length(galaxies),replace = TRUE))
+  }
+})
+
+cl2 <- makeCluster(3)
+registerDoParallel(cl2)
+
+time_parallel <- system.time({
+  gal_median_parallel <- foreach(i = 1:1000, .combine = c, .packages = 'MASS') %dopar% {
+    median(sample(galaxies,length(galaxies),replace = TRUE))
+  }
+})
+
+time_chunks <- system.time({
+  gal_median_chunks <- foreach(i = 1:10, .combine = c, .packages = 'MASS') %dopar% {
+    gal_median_chunk <- numeric(100)
+    for (j in 1:100) {
+      gal_median_chunk[j] <- median(sample(galaxies,length(galaxies),replace = TRUE))
+    }
+    gal_median_chunk
+  }
+})
+
+stopCluster(cl2)
+
+results2 <- data.frame(Processing = c("Serial","Parallel","Parallel (Chunks)"),
+                       Time = c(time_serial[3],time_parallel[3],time_chunks[3]))
+kable(results2)
+```
+
+## Question 3:
+
+Estimate coverage of a percentile bootstrap confidence interval for the following scenario: sample of size 50 from an exponential distribution with mean 1.
+
+```{r}
+cl3 <- makeCluster(5)
+registerDoParallel(cl3)
+
+coverage <- foreach(i = 1:1000, .combine ="rbind")%dopar%{
+  values <- rexp(50,1)
+  bstr <- replicate(1000, sample(values, 50, replace = TRUE))
+  bstr_mean <- colMeans(bstr)
+  CI <- quantile(bstr_mean, c(0.025,0.975))
+  return(1 >= CI[1] && 1 <= CI[2]) 
+}
+stopCluster(cl3)
+cat("Coverage:",mean(coverage)*100,"%")
+```
+
+## Question 4:
+
+The package iterators provides several functions that can be used to create sequences for the `foreach` function. For example, the `irnorm` function creates an object that iterates over vectors of normally distributed random numbers. It is useful when you need to use random variables drawn from one distribution in an expression that is run in parallel.
+
+In this exercise, use the `foreach` and `irnorm` functions to iterate over 3 vectors, each containing 5 random variables. Find the largest value in each vector, and print those largest values.
+
+Before running the `foreach` function set the seed to 1234.
+
+```{r}
+set.seed(1234)
+
+max_values <- foreach(x = irnorm(count = 3, n = 5), .combine = c) %do% {
+  max(x)
+}
+
+print(max_values)
+```
+
+## Question 5:
+
+Compare run time between `parLapply`, `foreach` and `replicate` for the above problem.
+
+```{r}
+time_replicate <- system.time({
+  res1 <- replicate(3, max(rnorm(5)))
+})
+
+cl5 <- makeCluster(3)
+registerDoParallel(cl5)
+
+time_parLapply <- system.time({
+  res2 <- parLapply(cl5, 1:3, function(i){max(rnorm(5))})
+  })
+
+time_foreach <- system.time({
+  res3 <- foreach(x = irnorm(count = 3, n = 5), .combine = c) %dopar% {
+    max(x)
+  }
+})
+
+stopCluster(cl5)
+```
+
+```{r}
+num_vectors <- 1000
+vector_size <- 10000
+
+time_replicate2 <- system.time({
+  res1 <- replicate(num_vectors, max(rnorm(vector_size)))
+})
+
+cl6 <- makeCluster(3)
+registerDoParallel(cl6)
+
+time_parLapply2 <- system.time({
+  res2 <- parLapply(cl6, 1:num_vectors, function(i, sz) max(rnorm(sz)), sz = vector_size)
+})
+
+time_foreach2 <- system.time({
+  res3 <- foreach(x = irnorm(count = num_vectors, n = vector_size), .combine = c) %dopar% {
+    max(x)
+  }
+})
+
+stopCluster(cl6)
+
+results_table <- data.frame(
+  Method = c("replicate", "parLapply", "foreach"),
+  'Time (3 vectors)' = c(time_replicate["elapsed"], time_parLapply["elapsed"], time_foreach["elapsed"]),
+  'Time (1000 vectors)' = c(time_replicate2["elapsed"], 
+                   time_parLapply2["elapsed"], 
+                   time_foreach2["elapsed"]),
+  check.names = FALSE
+)
+kable(results_table)
+```

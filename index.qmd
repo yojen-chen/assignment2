@@ -1,0 +1,11 @@
+---
+title: "Home page"
+format: html
+editor: visual
+---
+
+## Assignment 2 : Yo-Jen Chen (CHNYOJ001)
+
+This assignment consists of:
+
+-   Parallel Prac
