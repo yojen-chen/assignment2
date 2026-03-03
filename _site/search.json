@@ -1,0 +1,82 @@
+[
+  {
+    "objectID": "parallel.html",
+    "href": "parallel.html",
+    "title": "Parallel Prac",
+    "section": "",
+    "text": "Use a foreach loop to repeat 100 times:\ngenerate a random sample from an exponential distribution with mean 1\ncalculate mean and variance.\nrow-bind your results (rbind) (results = mean and variance).\n\nresult &lt;- foreach(i = 1:100, .combine = 'rbind')%do%{\n  sample &lt;- rexp(100, 1)\n  mean &lt;- mean(sample)\n  variance &lt;- var(sample)\n  as.vector(c(mean,variance))\n}\ncolnames(result) &lt;- c(\"Mean\", \"Variance\")\nresult\n\n                Mean  Variance\nresult.1   0.7875529 0.7760223\nresult.2   1.0452705 1.2334080\nresult.3   0.8586645 0.7384499\nresult.4   1.0765905 1.3391402\nresult.5   0.9045022 0.7812058\nresult.6   1.0104722 1.0501954\nresult.7   0.9719923 1.0763033\nresult.8   1.0376426 1.2151634\nresult.9   0.8079896 0.5873021\nresult.10  0.8376582 0.7765807\nresult.11  1.1419674 2.4284594\nresult.12  1.0160235 0.9496547\nresult.13  1.0716054 1.3332725\nresult.14  0.9303188 0.6236358\nresult.15  1.1461904 1.5426064\nresult.16  1.0454510 0.8574013\nresult.17  1.1024791 1.0642923\nresult.18  0.9385587 0.9157116\nresult.19  1.0666533 1.2073552\nresult.20  0.9227367 0.8711213\nresult.21  1.0898938 1.2314587\nresult.22  1.1578562 1.2572220\nresult.23  0.8941942 0.9698340\nresult.24  0.9409577 0.9412179\nresult.25  0.9556475 0.6277254\nresult.26  1.1781068 1.1721873\nresult.27  0.9142236 0.7377566\nresult.28  0.8992293 0.8353504\nresult.29  1.0125833 0.9182555\nresult.30  0.9055557 0.8242181\nresult.31  0.9914991 0.8981927\nresult.32  0.9811966 1.0990998\nresult.33  0.9826663 1.0599595\nresult.34  0.9928903 0.6784943\nresult.35  0.9715491 0.8751012\nresult.36  0.8046201 0.7019863\nresult.37  1.0962526 1.0967444\nresult.38  1.1217876 1.3946365\nresult.39  1.0635298 1.2428149\nresult.40  1.0596067 1.0481226\nresult.41  1.0490962 1.0526046\nresult.42  0.8789601 0.8703338\nresult.43  0.9756640 1.1893278\nresult.44  0.8947326 0.6823662\nresult.45  0.8530346 0.5875452\nresult.46  1.0226529 1.0579556\nresult.47  1.0705653 1.4678849\nresult.48  0.9652895 0.7699996\nresult.49  1.0156526 0.9330538\nresult.50  0.9730941 0.8971440\nresult.51  1.1200308 1.3397489\nresult.52  1.1546451 1.0868051\nresult.53  0.9773154 0.9190995\nresult.54  0.9863319 1.6096985\nresult.55  1.0966993 1.1945411\nresult.56  0.9618223 0.8997006\nresult.57  1.0445458 0.8156693\nresult.58  1.0636948 1.0770648\nresult.59  0.8620977 0.5714872\nresult.60  0.9431797 1.2390514\nresult.61  1.0721925 0.9229060\nresult.62  0.9109993 0.6521167\nresult.63  0.8924096 0.7620240\nresult.64  1.0054576 0.8150425\nresult.65  1.0170416 1.3675210\nresult.66  0.9683821 0.8145349\nresult.67  0.9329221 0.7778306\nresult.68  0.9912051 1.0366937\nresult.69  0.9897267 0.6714398\nresult.70  1.1261754 1.3216288\nresult.71  1.0996432 1.0150881\nresult.72  0.9850986 0.8069691\nresult.73  0.9786627 0.9601390\nresult.74  0.9024924 0.6433507\nresult.75  0.9865128 0.8490682\nresult.76  1.1447085 1.3086716\nresult.77  0.9205956 0.9431683\nresult.78  0.9972030 0.9952876\nresult.79  1.0645893 1.2867920\nresult.80  1.1029375 1.0603800\nresult.81  1.1033036 0.9408300\nresult.82  1.0831526 1.2869165\nresult.83  1.1632594 1.5324540\nresult.84  0.9167015 0.7863728\nresult.85  0.7687902 0.4948929\nresult.86  0.8922444 0.7853782\nresult.87  1.1417163 0.9643173\nresult.88  0.9595972 1.1047942\nresult.89  0.8363666 0.7045038\nresult.90  0.8922709 0.6433528\nresult.91  0.9561070 0.6900753\nresult.92  0.8704153 0.6831002\nresult.93  1.0774933 1.2472883\nresult.94  1.0512979 1.3080273\nresult.95  1.0194166 0.9239640\nresult.96  0.9798900 0.9250667\nresult.97  0.9557147 0.7536358\nresult.98  1.0523978 1.2257480\nresult.99  1.1191711 1.2400777\nresult.100 0.8748295 0.8390094",
+    "crumbs": [
+      "Parallel Prac"
+    ]
+  },
+  {
+    "objectID": "parallel.html#question-1",
+    "href": "parallel.html#question-1",
+    "title": "Parallel Prac",
+    "section": "",
+    "text": "Use a foreach loop to repeat 100 times:\ngenerate a random sample from an exponential distribution with mean 1\ncalculate mean and variance.\nrow-bind your results (rbind) (results = mean and variance).\n\nresult &lt;- foreach(i = 1:100, .combine = 'rbind')%do%{\n  sample &lt;- rexp(100, 1)\n  mean &lt;- mean(sample)\n  variance &lt;- var(sample)\n  as.vector(c(mean,variance))\n}\ncolnames(result) &lt;- c(\"Mean\", \"Variance\")\nresult\n\n                Mean  Variance\nresult.1   0.7875529 0.7760223\nresult.2   1.0452705 1.2334080\nresult.3   0.8586645 0.7384499\nresult.4   1.0765905 1.3391402\nresult.5   0.9045022 0.7812058\nresult.6   1.0104722 1.0501954\nresult.7   0.9719923 1.0763033\nresult.8   1.0376426 1.2151634\nresult.9   0.8079896 0.5873021\nresult.10  0.8376582 0.7765807\nresult.11  1.1419674 2.4284594\nresult.12  1.0160235 0.9496547\nresult.13  1.0716054 1.3332725\nresult.14  0.9303188 0.6236358\nresult.15  1.1461904 1.5426064\nresult.16  1.0454510 0.8574013\nresult.17  1.1024791 1.0642923\nresult.18  0.9385587 0.9157116\nresult.19  1.0666533 1.2073552\nresult.20  0.9227367 0.8711213\nresult.21  1.0898938 1.2314587\nresult.22  1.1578562 1.2572220\nresult.23  0.8941942 0.9698340\nresult.24  0.9409577 0.9412179\nresult.25  0.9556475 0.6277254\nresult.26  1.1781068 1.1721873\nresult.27  0.9142236 0.7377566\nresult.28  0.8992293 0.8353504\nresult.29  1.0125833 0.9182555\nresult.30  0.9055557 0.8242181\nresult.31  0.9914991 0.8981927\nresult.32  0.9811966 1.0990998\nresult.33  0.9826663 1.0599595\nresult.34  0.9928903 0.6784943\nresult.35  0.9715491 0.8751012\nresult.36  0.8046201 0.7019863\nresult.37  1.0962526 1.0967444\nresult.38  1.1217876 1.3946365\nresult.39  1.0635298 1.2428149\nresult.40  1.0596067 1.0481226\nresult.41  1.0490962 1.0526046\nresult.42  0.8789601 0.8703338\nresult.43  0.9756640 1.1893278\nresult.44  0.8947326 0.6823662\nresult.45  0.8530346 0.5875452\nresult.46  1.0226529 1.0579556\nresult.47  1.0705653 1.4678849\nresult.48  0.9652895 0.7699996\nresult.49  1.0156526 0.9330538\nresult.50  0.9730941 0.8971440\nresult.51  1.1200308 1.3397489\nresult.52  1.1546451 1.0868051\nresult.53  0.9773154 0.9190995\nresult.54  0.9863319 1.6096985\nresult.55  1.0966993 1.1945411\nresult.56  0.9618223 0.8997006\nresult.57  1.0445458 0.8156693\nresult.58  1.0636948 1.0770648\nresult.59  0.8620977 0.5714872\nresult.60  0.9431797 1.2390514\nresult.61  1.0721925 0.9229060\nresult.62  0.9109993 0.6521167\nresult.63  0.8924096 0.7620240\nresult.64  1.0054576 0.8150425\nresult.65  1.0170416 1.3675210\nresult.66  0.9683821 0.8145349\nresult.67  0.9329221 0.7778306\nresult.68  0.9912051 1.0366937\nresult.69  0.9897267 0.6714398\nresult.70  1.1261754 1.3216288\nresult.71  1.0996432 1.0150881\nresult.72  0.9850986 0.8069691\nresult.73  0.9786627 0.9601390\nresult.74  0.9024924 0.6433507\nresult.75  0.9865128 0.8490682\nresult.76  1.1447085 1.3086716\nresult.77  0.9205956 0.9431683\nresult.78  0.9972030 0.9952876\nresult.79  1.0645893 1.2867920\nresult.80  1.1029375 1.0603800\nresult.81  1.1033036 0.9408300\nresult.82  1.0831526 1.2869165\nresult.83  1.1632594 1.5324540\nresult.84  0.9167015 0.7863728\nresult.85  0.7687902 0.4948929\nresult.86  0.8922444 0.7853782\nresult.87  1.1417163 0.9643173\nresult.88  0.9595972 1.1047942\nresult.89  0.8363666 0.7045038\nresult.90  0.8922709 0.6433528\nresult.91  0.9561070 0.6900753\nresult.92  0.8704153 0.6831002\nresult.93  1.0774933 1.2472883\nresult.94  1.0512979 1.3080273\nresult.95  1.0194166 0.9239640\nresult.96  0.9798900 0.9250667\nresult.97  0.9557147 0.7536358\nresult.98  1.0523978 1.2257480\nresult.99  1.1191711 1.2400777\nresult.100 0.8748295 0.8390094",
+    "crumbs": [
+      "Parallel Prac"
+    ]
+  },
+  {
+    "objectID": "parallel.html#question-2",
+    "href": "parallel.html#question-2",
+    "title": "Parallel Prac",
+    "section": "Question 2:",
+    "text": "Question 2:\nUse the doParallel package and foreach to bootstrap the median for the galaxies data (in library MASS).\nIf the foreach function needs access to data or a function from a certain package, this can be done by adding the .packages='MASS' (for example) argument.\nHow does processing time compare to that of serial processing? If each iteration’s run time is small, relative to the amount of data that needs to be loaded and returned, parallel processing might not actually speed up the total run time. Bootstrapping is relatively small: draw a sample, calculate a statistic. It might only start making a difference if each chunk becomes large relatively to the overheads of data transfer. Experiment with this. Try doing 1000 bootstrap samples at a time instead of managing single bootstrap samples.\n\ntime_serial &lt;- system.time({\n  gal_median_serial &lt;- foreach(i = 1:1000, .combine = c, .packages = 'MASS') %do% {\n    median(sample(galaxies,length(galaxies),replace = TRUE))\n  }\n})\n\ncl2 &lt;- makeCluster(3)\nregisterDoParallel(cl2)\n\ntime_parallel &lt;- system.time({\n  gal_median_parallel &lt;- foreach(i = 1:1000, .combine = c, .packages = 'MASS') %dopar% {\n    median(sample(galaxies,length(galaxies),replace = TRUE))\n  }\n})\n\ntime_chunks &lt;- system.time({\n  gal_median_chunks &lt;- foreach(i = 1:10, .combine = c, .packages = 'MASS') %dopar% {\n    gal_median_chunk &lt;- numeric(100)\n    for (j in 1:100) {\n      gal_median_chunk[j] &lt;- median(sample(galaxies,length(galaxies),replace = TRUE))\n    }\n    gal_median_chunk\n  }\n})\n\nstopCluster(cl2)\n\nresults2 &lt;- data.frame(Processing = c(\"Serial\",\"Parallel\",\"Parallel (Chunks)\"),\n                       Time = c(time_serial[3],time_parallel[3],time_chunks[3]))\nkable(results2)\n\n\n\n\nProcessing\nTime\n\n\n\n\nSerial\n0.366\n\n\nParallel\n0.528\n\n\nParallel (Chunks)\n0.050",
+    "crumbs": [
+      "Parallel Prac"
+    ]
+  },
+  {
+    "objectID": "parallel.html#question-3",
+    "href": "parallel.html#question-3",
+    "title": "Parallel Prac",
+    "section": "Question 3:",
+    "text": "Question 3:\nEstimate coverage of a percentile bootstrap confidence interval for the following scenario: sample of size 50 from an exponential distribution with mean 1.\n\ncl3 &lt;- makeCluster(5)\nregisterDoParallel(cl3)\n\ncoverage &lt;- foreach(i = 1:1000, .combine =\"rbind\")%dopar%{\n  values &lt;- rexp(50,1)\n  bstr &lt;- replicate(1000, sample(values, 50, replace = TRUE))\n  bstr_mean &lt;- colMeans(bstr)\n  CI &lt;- quantile(bstr_mean, c(0.025,0.975))\n  return(1 &gt;= CI[1] && 1 &lt;= CI[2]) \n}\nstopCluster(cl3)\ncat(\"Coverage:\",mean(coverage)*100,\"%\")\n\nCoverage: 93 %",
+    "crumbs": [
+      "Parallel Prac"
+    ]
+  },
+  {
+    "objectID": "parallel.html#question-4",
+    "href": "parallel.html#question-4",
+    "title": "Parallel Prac",
+    "section": "Question 4:",
+    "text": "Question 4:\nThe package iterators provides several functions that can be used to create sequences for the foreach function. For example, the irnorm function creates an object that iterates over vectors of normally distributed random numbers. It is useful when you need to use random variables drawn from one distribution in an expression that is run in parallel.\nIn this exercise, use the foreach and irnorm functions to iterate over 3 vectors, each containing 5 random variables. Find the largest value in each vector, and print those largest values.\nBefore running the foreach function set the seed to 1234.\n\nset.seed(1234)\n\nmax_values &lt;- foreach(x = irnorm(count = 3, n = 5), .combine = c) %do% {\n  max(x)\n}\n\nprint(max_values)\n\n[1] 1.0844412 0.5060559 0.9594941",
+    "crumbs": [
+      "Parallel Prac"
+    ]
+  },
+  {
+    "objectID": "parallel.html#question-5",
+    "href": "parallel.html#question-5",
+    "title": "Parallel Prac",
+    "section": "Question 5:",
+    "text": "Question 5:\nCompare run time between parLapply, foreach and replicate for the above problem.\n\ntime_replicate &lt;- system.time({\n  res1 &lt;- replicate(3, max(rnorm(5)))\n})\n\ncl5 &lt;- makeCluster(3)\nregisterDoParallel(cl5)\n\ntime_parLapply &lt;- system.time({\n  res2 &lt;- parLapply(cl5, 1:3, function(i){max(rnorm(5))})\n  })\n\ntime_foreach &lt;- system.time({\n  res3 &lt;- foreach(x = irnorm(count = 3, n = 5), .combine = c) %dopar% {\n    max(x)\n  }\n})\n\nstopCluster(cl5)\n\n\nnum_vectors &lt;- 1000\nvector_size &lt;- 10000\n\ntime_replicate2 &lt;- system.time({\n  res1 &lt;- replicate(num_vectors, max(rnorm(vector_size)))\n})\n\ncl6 &lt;- makeCluster(3)\nregisterDoParallel(cl6)\n\ntime_parLapply2 &lt;- system.time({\n  res2 &lt;- parLapply(cl6, 1:num_vectors, function(i, sz) max(rnorm(sz)), sz = vector_size)\n})\n\ntime_foreach2 &lt;- system.time({\n  res3 &lt;- foreach(x = irnorm(count = num_vectors, n = vector_size), .combine = c) %dopar% {\n    max(x)\n  }\n})\n\nstopCluster(cl6)\n\nresults_table &lt;- data.frame(\n  Method = c(\"replicate\", \"parLapply\", \"foreach\"),\n  'Time (3 vectors)' = c(time_replicate[\"elapsed\"], time_parLapply[\"elapsed\"], time_foreach[\"elapsed\"]),\n  'Time (1000 vectors)' = c(time_replicate2[\"elapsed\"], \n                   time_parLapply2[\"elapsed\"], \n                   time_foreach2[\"elapsed\"]),\n  check.names = FALSE\n)\nkable(results_table)\n\n\n\n\nMethod\nTime (3 vectors)\nTime (1000 vectors)\n\n\n\n\nreplicate\n0.002\n0.665\n\n\nparLapply\n0.003\n0.288\n\n\nforeach\n0.021\n1.223",
+    "crumbs": [
+      "Parallel Prac"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home page",
+    "section": "",
+    "text": "This assignment consists of:\n\nParallel Practical",
+    "crumbs": [
+      "Home page"
+    ]
+  },
+  {
+    "objectID": "index.html#assignment-2-yo-jen-chen-chnyoj001",
+    "href": "index.html#assignment-2-yo-jen-chen-chnyoj001",
+    "title": "Home page",
+    "section": "",
+    "text": "This assignment consists of:\n\nParallel Practical",
+    "crumbs": [
+      "Home page"
+    ]
+  }
+]
