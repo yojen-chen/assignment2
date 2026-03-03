@@ -8,4 +8,4 @@ editor: visual
 
 This assignment consists of:
 
--   Parallel Practical
+-   Parallel Prac
