@@ -9,7 +9,7 @@ Use a `foreach` loop to repeat 100 times:
 
 generate a random sample from an exponential distribution with mean 1
 
-calculate mean and variance
+calculate mean and variance.
 
 row-bind your results (rbind) (results = mean and variance).
 
